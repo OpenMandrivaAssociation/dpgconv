@@ -44,3 +44,17 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_bindir}/dpgconv.py
 
 
+
+
+%changelog
+* Thu Dec 09 2010 Oden Eriksson <oeriksson@mandriva.com> 9-2mdv2011.0
++ Revision: 617874
+- the mass rebuild of 2010.0 packages
+
+* Thu Oct 15 2009 Guillaume Bedot <littletux@mandriva.org> 9-1mdv2010.0
++ Revision: 457577
+- import dpgconv
+
+
+* Thu Oct 15 2009 Guillaume Bedot <littletux@mandriva.org> 9-1mdv2010.0
+- New package for dpgconv

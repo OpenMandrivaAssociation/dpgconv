@@ -1,0 +1,26 @@
+#!/bin/bash
+# dpgshow
+# a small utility to preview dpg files
+# Usage : dpgshow <file.dpg>
+# License GNU GPL v2
+
+# $1 : the file to preview
+
+# first check the file exists, deps (bash ?, od, dd, mplayer)
+
+# read some info from the header
+#read -u 0 -n 4 TYPEFICH < "$1"
+FPS=`od -j 9 -N 2 -t d2 "$1" | awk '{ printf $2 }'`
+AUDSTART=`od -j 20 -N 4 -i "$1" | awk '{ printf $2 }'`
+AUDLEN=`od -j 24 -N 4 -i "$1" | awk '{ printf $2 }'`
+VIDSTART=`od -j 28 -N 4 -i "$1" | awk '{ printf $2 }'`
+VIDLEN=`od -j 32 -N 4 -i "$1" | awk '{ printf $2 }'`
+echo FPS=$FPS , AUDSTART=$AUDSTART , AUDLEN=$AUDLEN , VIDSTART=$VIDSTART , VIDLEN=$((VIDLEN+1))
+
+# split $1 into two temp files.
+dd if="$1" of=~/tmp/preview.mp2 skip=$AUDSTART ibs=1 count=$AUDLEN
+dd if="$1" of=~/tmp/preview.m1v skip=$VIDSTART ibs=1 count=$((VIDLEN+1))
+
+mplayer -fps $FPS ~/tmp/preview.m1v -audiofile ~/tmp/preview.mp2
+
+#rm -f ~/tmp/preview.{m1v,mp2}

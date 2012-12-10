@@ -1,0 +1,60 @@
+Here is a very short documentation to help you with starting using dpgconv
+
+What is dpgconv:
+dpgconv can convert videos to DPG format in one run (not only one at time).
+Source videos can be anything supported by mplayer/mencoder including 
+files, DVDs, VCDs ...
+You can hardcode subtitles in the videos.
+You can specify video and audio bitrates, but remember you are limited by 
+what the NDS/NDSi and DPG formats can handle : only one audio track, and a 
+video bitrate low enough to allow the game console to display it.
+
+
+Options:
+The full list of options can be obtained using : dpgconv -h
+
+
+An example:
+How to convert a video dvd, using high quality encoding, 25fps, 320kbps 
+for the video, the second audio track, the same aspect as the original, and 
+normalized volume :
+
+1) Find the right audio track:
+mplayer -vo null -ao null -identify -frames 1 dvd:////dev/dvd | grep ID_AID
+
+2) Convert with:
+dpgconv.py -q -f 25 -v 320 --aid 129 --keep-aspect --volnorm dvd:////dev/dvd
+
+This will result in a dvd.dpg file in the current directory (without the 
+device name, you would have an hidden ".dpg" file) to copy to your moonshell 
+SD card.
+
+
+A few advises:
+* don't mess with -2 option
+* default format is now DPG4, so don't forget to change it if you use 
+ moonshell 1.
+* prefer -aid 129 to options in ~/.mplayer/mencoder.conf or --ma "-alang fr"
+* To check / demux a video on your PC, you can try dpgshow included  in the 
+ doc of this rpm package (or write a better one, "dd ibs=1" is slow) 
+
+
+Bugs / Todo:
+- Fix youtube video encoding
+- Fix a/v sync with some source codecs
+- Add an other setting (-vhq ?) using dia=4:pre_dia=4 and higher bitrates
+- Support ogg/vorbis audio in DPG3 videos
+
+
+Author:
+Anton Romanov
+
+
+Contributors:
+littletux
+NorQue
+
+
+Website:
+http://theli.is-a-geek.org/blog/static/dpgconv
+
