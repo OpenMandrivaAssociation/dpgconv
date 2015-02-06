@@ -1,6 +1,6 @@
 Name:			dpgconv
 Version: 		9
-Release:		%mkrel 2
+Release:		3
 
 Summary: 	Transcode video files to DPG (nDs mPeG)
 Source0: 	http://theli.is-a-geek.org/files/dpgconv/dpgconv-9.py.bz2
