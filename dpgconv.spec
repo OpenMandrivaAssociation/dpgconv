@@ -9,7 +9,7 @@ Source2:	dpgshow
 
 License: 	GPLv2
 Group:	 	Video
-URL:		http://theli.is-a-geek.org/blog/static/dpgconv
+URL:		https://theli.is-a-geek.org/blog/static/dpgconv
 
 Requires:	mplayer
 Requires:	mencoder
